@@ -15,4 +15,4 @@ Route::get('/', HomeController::class);
     Route::put('/cursos/{curso}', 'update')->name("cursos.update");
     Route::delete('/cursos/{curso}', 'destroy')->name('cursos.destroy');
 }); */
-Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
+Route::resource('cursos', CursoController::class)->parameters(['cursos' => 'curso'])->names('cursos');
