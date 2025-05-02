@@ -4,6 +4,9 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+use App\Mail\ContactanosMailable;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', HomeController::class)->name('home');
 
 /* Route::controller(CursoController::class)->group(function() {
@@ -18,3 +21,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::resource('cursos', CursoController::class)->parameters(['cursos' => 'curso'])->names('cursos');
 
 Route::view('/nosotros', 'nosotros')->name('nosotros');
+
+Route::get('contactanos', function() {
+    $correo = new ContactanosMailable;
+
+    Mail::to('destino@example.com')->send($correo);
+
+    return "Mensaje enviado";
+});
