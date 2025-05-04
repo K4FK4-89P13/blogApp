@@ -1,5 +1,5 @@
 <header>
-    <h1>MikuZilla</h1>
+    <h1>Blog App</h1>
     <nav>
         <ul>
             <li>
@@ -16,6 +16,11 @@
                 <a href="{{route('nosotros')}}"
                     class="{{request()->routeIs('nosotros') ? 'active' : ''}}"
                 >Nosotros</a>
+            </li>
+            <li>
+                <a href="{{route('contactanos.index')}}"
+                    class="{{request()->routeIs('contactanos.*') ? 'active' : ''}}"
+                >Contactanos</a>
             </li>
         </ul>
     </nav>

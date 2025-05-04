@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +23,5 @@ Route::resource('cursos', CursoController::class)->parameters(['cursos' => 'curs
 
 Route::view('/nosotros', 'nosotros')->name('nosotros');
 
-Route::get('contactanos', function() {
-    $correo = new ContactanosMailable;
-
-    Mail::to('destino@example.com')->send($correo);
-
-    return "Mensaje enviado";
-});
+Route::get('contactanos', [ContactanosController::class, 'index'])->name('contactanos.index');
+Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
