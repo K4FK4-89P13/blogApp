@@ -1,27 +1,20 @@
 <?php
 
-use App\Http\Controllers\ContactanosController;
-use App\Http\Controllers\CursoController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Mail\ContactanosMailable;
-use Illuminate\Support\Facades\Mail;
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', HomeController::class)->name('home');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-/* Route::controller(CursoController::class)->group(function() {
-    Route::get('/cursos', 'index')->name("cursos.index");
-    Route::get('/cursos/create', 'create')->name("cursos.create");
-    Route::post('/cursos', 'store')->name('cursos.store');
-    Route::get('/cursos/{id}', 'show')->name("cursos.show");
-    Route::get('/cursos/{id}/edit', 'edit')->name("cursos.edit");
-    Route::put('/cursos/{curso}', 'update')->name("cursos.update");
-    Route::delete('/cursos/{curso}', 'destroy')->name('cursos.destroy');
-}); */
-Route::resource('cursos', CursoController::class)->parameters(['cursos' => 'curso'])->names('cursos');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::view('/nosotros', 'nosotros')->name('nosotros');
-
-Route::get('contactanos', [ContactanosController::class, 'index'])->name('contactanos.index');
-Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
+require __DIR__.'/auth.php';

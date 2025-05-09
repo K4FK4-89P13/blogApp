@@ -13,7 +13,7 @@ class ContactanosMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = "Informacion de Contacto";
+    //public $subject = "Informacion de Contacto";
     public $contacto;
 
     /**
