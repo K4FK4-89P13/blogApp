@@ -26,7 +26,7 @@ class Alert extends Component
                 $clases = "bg-orange-100 border-orange-500 text-orange-700";
                 break;
         }
-        $this->clases = $clases;
+        $this->clases = $clases." ".$type;
     }
 
     /**
